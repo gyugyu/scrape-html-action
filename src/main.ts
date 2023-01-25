@@ -1,16 +1,15 @@
 import * as core from '@actions/core'
-import {wait} from './wait'
+import scrape from './scrape'
 
 async function run(): Promise<void> {
   try {
-    const ms: string = core.getInput('milliseconds')
-    core.debug(`Waiting ${ms} milliseconds ...`) // debug is only output if you set the secret `ACTIONS_STEP_DEBUG` to true
+    const sourceUrl = core.getInput('url')
+    const selector = core.getInput('selector')
+    const destination = core.getInput('destination')
 
-    core.debug(new Date().toTimeString())
-    await wait(parseInt(ms, 10))
-    core.debug(new Date().toTimeString())
-
-    core.setOutput('time', new Date().toTimeString())
+    core.debug(`Fetching ${sourceUrl}  ...`)
+    const html = await scrape(sourceUrl, selector, destination)
+    core.setOutput('html', html)
   } catch (error) {
     if (error instanceof Error) core.setFailed(error.message)
   }

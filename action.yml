@@ -1,11 +1,20 @@
 name: 'Your name here'
-description: 'Provide a description here'
+description: 'Fetch HTML from the specific URL and parse it'
 author: 'Your name or organization here'
 inputs:
   milliseconds: # change this
     required: true
     description: 'input description here'
     default: 'default value if applicable'
+  url:
+    required: true
+    description: 'test'
+  selector:
+    required: false
+    description: 'aaaa'
+  destination:
+    required: false
+    description: 'aaaa'
 runs:
   using: 'node16'
   main: 'dist/index.js'
