@@ -1,20 +1,16 @@
-name: 'Your name here'
+name: 'Scrape HTML'
 description: 'Fetch HTML from the specific URL and parse it'
-author: 'Your name or organization here'
+author: 'Yusuke Yagyu'
 inputs:
-  milliseconds: # change this
-    required: true
-    description: 'input description here'
-    default: 'default value if applicable'
   url:
     required: true
-    description: 'test'
+    description: 'URL to fetch'
   selector:
     required: false
-    description: 'aaaa'
+    description: 'selector to select from the HTML'
   destination:
     required: false
-    description: 'aaaa'
+    description: 'destination file path'
 runs:
   using: 'node16'
   main: 'dist/index.js'
