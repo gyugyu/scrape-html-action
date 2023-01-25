@@ -1,8 +1,8 @@
 {
-  "name": "typescript-action",
+  "name": "scrape-html-action",
   "version": "0.0.0",
   "private": true,
-  "description": "TypeScript template action",
+  "description": "GitHub action that fetch HTML from the specific URL and parse it",
   "main": "lib/main.js",
   "scripts": {
     "build": "tsc",
@@ -17,12 +17,8 @@
     "type": "git",
     "url": "git+https://github.com/actions/typescript-action.git"
   },
-  "keywords": [
-    "actions",
-    "node",
-    "setup"
-  ],
-  "author": "",
+  "keywords": [],
+  "author": "Yusuke Yagyu <yu@hoaxster.net>",
   "license": "MIT",
   "dependencies": {
     "@actions/core": "^1.10.0",
@@ -33,7 +29,7 @@
     "@types/node": "^18.11.18",
     "@types/node-fetch": "^2.6.2",
     "@typescript-eslint/parser": "^4.33.0",
-    "@vercel/ncc": "^0.31.1",
+    "@vercel/ncc": "^0.36.0",
     "eslint": "^7.32.0",
     "eslint-plugin-github": "^4.3.2",
     "eslint-plugin-jest": "^25.3.2",
