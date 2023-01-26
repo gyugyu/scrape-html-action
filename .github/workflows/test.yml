@@ -23,4 +23,4 @@ jobs:
         with:
           url: http://example.com
           selector: div
-          destination: out.html
+          destination: path/to/out.html

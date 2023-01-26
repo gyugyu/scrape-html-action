@@ -1,5 +1,7 @@
 import * as cheerio from 'cheerio'
 import fetch from 'node-fetch'
+import {mkdirp} from 'mkdirp'
+import path from 'path'
 import {writeFile} from 'fs/promises'
 
 export default async function runFetcher(
@@ -14,7 +16,10 @@ export default async function runFetcher(
   const html = selector ? $(selector).html() : $.html()
   if (!html) throw new Error('HTML is empty')
 
-  if (destination) await writeFile(destination, html, 'utf8')
+  if (destination) {
+    await mkdirp(path.dirname(destination))
+    await writeFile(destination, html, 'utf8')
+  }
 
   return html
 }
