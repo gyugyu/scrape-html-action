@@ -51,8 +51,9 @@ function run() {
             const selector = core.getInput('selector');
             const destination = core.getInput('destination');
             core.debug(`Fetching ${sourceUrl}  ...`);
-            const html = yield (0, scrape_1.default)(sourceUrl, selector, destination);
+            const { html, title } = yield (0, scrape_1.default)(sourceUrl, selector, destination);
             core.setOutput('html', html);
+            core.setOutput('title', title);
         }
         catch (error) {
             if (error instanceof Error)
@@ -116,6 +117,7 @@ function runFetcher(sourceUrl, selector, destination) {
         const res = yield (0, node_fetch_1.default)(sourceUrl);
         const text = yield res.text();
         const $ = cheerio.load(text, null);
+        const title = $('title').text();
         const html = selector ? $(selector).html() : $.html();
         if (!html)
             throw new Error('HTML is empty');
@@ -123,7 +125,7 @@ function runFetcher(sourceUrl, selector, destination) {
             yield (0, mkdirp_1.mkdirp)(path_1.default.dirname(destination));
             yield (0, promises_1.writeFile)(destination, html, 'utf8');
         }
-        return html;
+        return { html, title };
     });
 }
 exports["default"] = runFetcher;

@@ -8,10 +8,12 @@ export default async function runFetcher(
   sourceUrl: string,
   selector: string | undefined,
   destination: string | undefined
-): Promise<string> {
+): Promise<{html: string; title: string}> {
   const res = await fetch(sourceUrl)
   const text = await res.text()
   const $ = cheerio.load(text, null)
+
+  const title = $('title').text()
 
   const html = selector ? $(selector).html() : $.html()
   if (!html) throw new Error('HTML is empty')
@@ -21,5 +23,5 @@ export default async function runFetcher(
     await writeFile(destination, html, 'utf8')
   }
 
-  return html
+  return {html, title}
 }

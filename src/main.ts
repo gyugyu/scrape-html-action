@@ -8,8 +8,9 @@ async function run(): Promise<void> {
     const destination = core.getInput('destination')
 
     core.debug(`Fetching ${sourceUrl}  ...`)
-    const html = await scrape(sourceUrl, selector, destination)
+    const {html, title} = await scrape(sourceUrl, selector, destination)
     core.setOutput('html', html)
+    core.setOutput('title', title)
   } catch (error) {
     if (error instanceof Error) core.setFailed(error.message)
   }
